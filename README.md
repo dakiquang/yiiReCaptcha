@@ -24,7 +24,7 @@ You can clone the [github repo](https://github.com/dakiquang/yiiReCaptcha) and g
     ...
 ```
 
-* 4/ Add `ReCaptchaValidator` in your model, for example:
+4/ Add `ReCaptchaValidator` in your model, for example:
 ```php
     public $verifyCode;
 
@@ -37,7 +37,7 @@ You can clone the [github repo](https://github.com/dakiquang/yiiReCaptcha) and g
     }
 ```
 
-* 5/ Usage this widget in your view
+5/ Usage this widget in your view
 ```php
 <?php
 $this->widget('<path-to-destination-folder>.yiiReCaptcha.ReCaptcha', array(
@@ -46,5 +46,14 @@ $this->widget('<path-to-destination-folder>.yiiReCaptcha.ReCaptcha', array(
 ));
 ?>
 ```
-
+6/ Use for multiple domain: By default, the reCaptcha is restricted to the specified domain. Use the secure token to request a CAPTCHA challenge from any domain. Adding more attribute `'isSecureToken' => true` to setup for any domain:
+```php
+<?php
+$this->widget('<path-to-destination-folder>.yiiReCaptcha.ReCaptcha', array(
+    'model'     => $model,
+    'attribute' => 'verifyCode',
+    'isSecureToken' => true,
+));
+?>
+```
 END.
