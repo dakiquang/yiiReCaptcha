@@ -189,7 +189,7 @@ class ReCaptcha extends CInputWidget
      */
     protected function currentTimestamp()
     {
-        return intval(round(microtime(true) * 1000));
+        return doubleval(round(microtime(true) * 1000));
     }
 
     /**
