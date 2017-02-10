@@ -6,6 +6,16 @@ Based on reCaptcha API 2.0
 
 You can clone the [github repo](https://github.com/dakiquang/yiiReCaptcha) and get the full codebase to build the distributive something you want. 
 
+## Dependencies
+
+* 1/ Install Composer
+
+```curl -sS https://getcomposer.org/installer | php ```
+
+* 2/ Install Guzzle (Here we use v 4.2.3)
+
+``` php composer.phar install ```
+
 ## Installation
 * 1/ Download GitHub repo (dakiquang/yiiReCaptcha) and extract files into a destination folder(extensions folder/vendor folder or any folder in your structure)
 

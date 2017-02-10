@@ -14,6 +14,12 @@
  * @link http://ceresolutions.com/
  * @copyright 2015 Ceres Solutions LLC
  */
+
+require __DIR__ . '/vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Message;
+
+
 class ReCaptchaValidator extends CValidator
 {
 
@@ -63,13 +69,14 @@ class ReCaptchaValidator extends CValidator
                 return;
             }
         }
-        $request  = self::SITE_VERIFY_URL . '?' . http_build_query(
-                array(
-                    'secret'   => $this->secret,
-                    'response' => $value,
-                    'remoteip' => Yii::app()->request->getUserHostAddress()
-                )
-        );
+
+        $client = new Client(self::SITE_VERIFY_URL);
+        $request = $client->get();
+        $q = $request->getQuery();
+        $q->set('secret', $this->secret);
+        $q->set('response', $value);
+        $q->set('remoteip', Yii::app()->request->getUserHostAddress());
+
         $response = $this->getResponse($request);
         if (!isset($response['success'])) {
             throw new CException('Invalid recaptcha verify response.');
@@ -101,8 +108,9 @@ class ReCaptchaValidator extends CValidator
      */
     protected function getResponse($request)
     {
-        $response = file_get_contents($request);
-        return CJSON::decode($response, true);
+        $response = $request->send();
+
+        return $response->json();
     }
 
 }
