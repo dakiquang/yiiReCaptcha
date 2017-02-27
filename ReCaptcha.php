@@ -24,7 +24,7 @@ class ReCaptcha extends CInputWidget
     public $jsCallback;
 
     /** @var array Additional html widget options, such as `class`. */
-    public $widgetOptions = [];
+    public $widgetOptions = array();
 
     /** @var if you might have a large number of hosted domains and would like to have one key working on all of them - the solution is the secure token. */
     public $isSecureToken = false;
@@ -91,7 +91,7 @@ class ReCaptcha extends CInputWidget
     protected function getLanguageSuffix()
     {
         $currentAppLanguage = Yii::app()->language;
-        $langsExceptions    = ['zh-CN', 'zh-TW', 'zh-TW'];
+        $langsExceptions    = array('zh-CN', 'zh-TW', 'zh-TW');
         if (strpos($currentAppLanguage, '-') === false) {
             return $currentAppLanguage;
         }
