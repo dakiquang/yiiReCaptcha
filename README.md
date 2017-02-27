@@ -14,13 +14,13 @@ You can clone the [github repo](https://github.com/dakiquang/yiiReCaptcha) and g
 * 3/ Configure this component in your configuration file (main.php file). The parameters siteKey and secret are required.
 
 ```php
-'components' => [
-    'reCaptcha' => [
+'components' => array(
+    'reCaptcha' => array(
         'name' => 'reCaptcha',
         'class' => '<path-to-destination-folder>\yiiReCaptcha\ReCaptcha',
         'key' => '<your-key>',
         'secret' => '<your-secret>',
-    ],
+    ),
     ...
 ```
 
