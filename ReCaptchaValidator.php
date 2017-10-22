@@ -41,7 +41,7 @@ class ReCaptchaValidator extends CValidator
             }
         }
         if ($this->message === null || empty($this->message)) {
-            $this->message = Yii::t('yii', 'The verification code is incorrect.');
+            $this->message = Yii::t('yii', 'An error occurred when attempting to verify your reCAPTCHA.');
         }
     }
 
@@ -63,19 +63,30 @@ class ReCaptchaValidator extends CValidator
                 return;
             }
         }
+        
+        // Make request
         $request  = self::SITE_VERIFY_URL . '?' . http_build_query(
-                array(
-                    'secret'   => $this->secret,
-                    'response' => $value,
-                    'remoteip' => Yii::app()->request->getUserHostAddress()
-                )
+            array(
+                'secret'   => $this->secret,
+                'response' => $value,
+                'remoteip' => Yii::app()->request->getUserHostAddress()
+            )
         );
         $response = $this->getResponse($request);
+        
+        // Errors
         if (!isset($response['success'])) {
             throw new CException('Invalid recaptcha verify response.');
         }
         if (!$response['success']) {
-            $message = $this->message;
+            $message = Yii::t('yii', 'reCAPTCHA was not able to verify you.');
+            // Add error codes from API response to validation error message.
+            if (Yii::app()->reCaptcha->showResponseErrors){
+                if (isset($response['error-codes']) && is_array($response['error-codes'])){
+                    $message .= ' Error code(s): ';
+                    $message .= implode(',', $response['error-codes']);
+                }
+            }
             $this->addError($object, $attribute, $message);
         }
     }

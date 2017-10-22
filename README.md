@@ -11,15 +11,16 @@ You can clone the [github repo](https://github.com/dakiquang/yiiReCaptcha) and g
 
 * 2/ [Sign up for an reCAPTCHA API keys on Google reCaptcha](https://www.google.com/recaptcha/admin#createsite). and get the key/secret pair
 
-* 3/ Configure this component in your configuration file (main.php file). The parameters siteKey and secret are required.
+* 3/ Configure this component in your configuration file (main.php file). The parameters siteKey and secret are required. If you are using as an extension, the &lt;path-to-destination-folder&gt; should be 'application.extensions'. The option showResponseErrors can be set to true to see the reCAPTCHA error codes returned in a failed API request.
 
 ```php
 'components' => [
     'reCaptcha' => [
         'name' => 'reCaptcha',
-        'class' => '<path-to-destination-folder>\yiiReCaptcha\ReCaptcha',
+        'class' => '<path-to-destination-folder>.yiiReCaptcha.ReCaptcha',
         'key' => '<your-key>',
         'secret' => '<your-secret>',
+        'showResponseErrors' => False,
     ],
     ...
 ```
