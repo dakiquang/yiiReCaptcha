@@ -28,6 +28,9 @@ class ReCaptcha extends CInputWidget
 
     /** @var if you might have a large number of hosted domains and would like to have one key working on all of them - the solution is the secure token. */
     public $isSecureToken = false;
+    
+    /** @var bool Show error codes from ReCAPTCHA API request in validation response */
+    public $showResponseErrors = false;
 
     public function init()
     {
